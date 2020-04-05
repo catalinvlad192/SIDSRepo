@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/bebe_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/searchDeviceButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/button_round1_no_bg"
+        android:text="@string/search_bluetooth_devices"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@+id/searchDeviceButton"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/checkBabyButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/square_button1_no_bg"
+        android:text="@string/data_from_monitor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchDeviceButton" />
+
+    <Button
+        android:id="@+id/firstAidButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/square_button2_no_bg"
+        android:text="@string/how_to_give_first_aid"
+        app:layout_constraintStart_toEndOf="@+id/checkBabyButton"
+        app:layout_constraintTop_toBottomOf="@+id/listView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

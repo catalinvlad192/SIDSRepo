@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FirstAidActivity">
+
+    <TextView
+        android:id="@+id/firstAidTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:textColor="#ffffff"
+        android:text="@string/first_aid_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/whatYouNeedToDoTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:background="@color/colorLightBlue"
+            android:textColor="#000000"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text="Unresponsive not breathing baby"/>
+
+            <TextView
+                android:id="@+id/actuallyWhatYouNeedToDoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:text="  If someone is with you, get them to call for emergency help.\n
+ If you’re on your own, you need to give one minute’s worth of CPR before you can call for help. This involves giving chest compressions and rescue breaths to keep the baby’s circulation going." />
+
+            <TextView
+                android:id="@+id/howToCPR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="@color/colorLightBlue"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="How to perform CPR on a baby"/>
+
+            <TextView
+                android:id="@+id/howToCPRActually"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:text=" - Place the baby on their back on a firm surface at about waist height in front of you, or on the floor.\n
+- Give five initial rescue breaths before starting the sequence of 30 chest compressions and two rescue breaths.\n
+- Check for breathing by tilting their head back and looking and feeling for breaths.\n
+- Tilting the child’s head back opens the airway by pulling the tongue forward." />
+
+            <TextView
+                android:id="@+id/rescueBreath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="@color/colorLightBlue"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="How to give a rescue breath"/>
+
+            <TextView
+                android:id="@+id/rescueBreathActually"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:text=" - If there is anything in their mouth pick it out and ensure the airway is clear and open.\n
+- Take a breath in and place your lips around the baby’s mouth and nose to form an airtight seal.\n
+- If you cannot make a seal around the mouth and nose, close the baby’s mouth and make a seal around the nose only. Blow steadily into the mouth until the chest rises.\n
+- Remove your mouth and allow the chest to fall.\n
+- Repeat four times more.\n
+- Now Give 30 chest compressions." />
+
+            <ImageView
+                android:id="@+id/mouth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/mouth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/chest_compression"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="@color/colorLightBlue"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="How to give a chest compression"/>
+
+            <TextView
+                android:id="@+id/chestCompressionActually"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:text=" - Place two fingertips of your lower hand on the center of the baby’s chest.\n
+- Press down vertically on the breastbone, and press the chest down by at least one-third of its depth.\n
+- Release the pressure without moving your fingers from their chest. Allow the chest to come back up fully. This is one compression.\n
+- Repeat this 30 times, at a rate of about twice a second – the speed of the song ‘Staying Alive’.\n
+- Now give two rescue breaths.\n
+- Carry on giving 30 chest compressions followed by two rescue breaths for as long as you can, or until help arrives.\n
+- If the baby starts breathing normally again, stop CPR and put them in the recovery position." />
+
+            <ImageView
+                android:id="@+id/chest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/chest_compression"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recoveryPosition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="@color/colorLightBlue"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:gravity="center"
+                android:text="Recovery position"/>
+
+            <TextView
+                android:id="@+id/recoveryPositionActually"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:textColor="#000000"
+                android:padding="10dp"
+                android:text=" - Cradle them in your arms, with their head tilted downwards. This will keep their airway open and stop them choking on their tongue or breathing in any vomit. Continue until help arrives." />
+
+            <ImageView
+                android:id="@+id/recovery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:background="@drawable/recov"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

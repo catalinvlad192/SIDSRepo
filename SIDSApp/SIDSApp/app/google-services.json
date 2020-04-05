@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "138246571133",
+    "firebase_url": "https://sidsapp-15c94.firebaseio.com",
+    "project_id": "sidsapp-15c94",
+    "storage_bucket": "sidsapp-15c94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:138246571133:android:34f054447027cbe7f51d14",
+        "android_client_info": {
+          "package_name": "com.example.sidsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "138246571133-b6nsvaauhkq591agi5j49f47h8en616t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sidsapp",
+            "certificate_hash": "37d8ce0d77f71db2dc5bd227725754c9887eae26"
+          }
+        },
+        {
+          "client_id": "138246571133-mdgdcdloaqk68reqd2r3fvijtvifdmlt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7ZZsgRtelHQrwYPj3rPYbDWSlH3qRetQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "138246571133-mdgdcdloaqk68reqd2r3fvijtvifdmlt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

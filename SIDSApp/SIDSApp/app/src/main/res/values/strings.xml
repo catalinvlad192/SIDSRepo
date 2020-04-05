@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SIDS Application</string>
+    <string name="title_activity_check_baby">Check your baby</string>
+    <string name="title_activity_first_aid">First aid</string>
+    <string name="search_bluetooth_devices">Search device</string>
+    <string name="connected_device">Connected device</string>
+    <string name="data_from_monitor">Check your baby</string>
+    <string name="how_to_give_first_aid">First aid</string>
+    <string name="first_aid_title"> How to perform baby CPR</string>
+
+</resources>
