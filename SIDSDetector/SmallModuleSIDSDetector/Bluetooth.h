@@ -13,7 +13,7 @@ class Bluetooth
 {
 public:
     Bluetooth();
-    void communicate(char* string);
+    void communicate(char* string, char* problems);
 };
 
 #endif  // BLUETOOTH_H_

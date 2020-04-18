@@ -27,6 +27,7 @@ private:
     int calculatePulseWith(int instantPulse);
     float calculateTemperature();
     int isDeviceRemoved(int pulse, float temp);
+    int checkForProblems(int pulse, float temp, char problems[20]);
 
     Thermometer thermometer_;
     Bluetooth bt_;

@@ -3,7 +3,7 @@
 Bluetooth::Bluetooth()
 {}
 
-void Bluetooth::communicate(char* string)
+void Bluetooth::communicate(char* string, char* problems)
 {
     if (Serial.available() > 0)
     {
@@ -14,7 +14,7 @@ void Bluetooth::communicate(char* string)
 
         Serial.println("GARBAGE");
         Serial.println(string);
-        Serial.println("P: 100, T: 37.9, Ox: 85%");
+        Serial.println(problems);
         Serial.println("OVER");
     }
 }

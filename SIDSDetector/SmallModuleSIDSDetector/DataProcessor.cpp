@@ -1,6 +1,13 @@
 #include "DataProcessor.h"
 
 #define PULSE_MIN 50 // 90
+#define PULSE_MAX 90 // 200
+
+#define TEMP_MAX 38.0f
+#define TEMP_MIN 36.0f
+
+#define TEMP_THRESHOLD_1 35.0f
+#define TEMP_THRESHOLD_2 33.0f
 
 DataProcessor::DataProcessor(int thermoPin)
     : thermometer_(thermoPin)
@@ -13,29 +20,36 @@ void DataProcessor::tick()
     float temperature = calculateTemperature();
     int pulse = calculatePulse();
 
-    char tempStr[7];
-    dtostrf(temperature, 3, 2, tempStr);
-
-    char oxStr[7];
-    dtostrf(ox_, 3, 2, oxStr);
-
-    int isRem = isDeviceRemoved(pulse, temperature);
-
-    char str[100];
-    sprintf(str, "%d %5s %5s %d STOP",
-        pulse,
-        oxStr,
-        tempStr,
-        isRem);
-
+/*----------------------------------------------
     static int count = 0;
     count++;
     if(count > 1000)
+-------------------------------------------------*/
+    if (Serial.available() > 0)
     {
-        Serial.println(str);
-        count = 0;
+        char problems[20];
+        int isDevRem = isDeviceRemoved(pulse, temperature);
+        int isProblem = checkForProblems(pulse, temperature, problems);
+
+        char tempStr[7];
+        dtostrf(temperature, 3, 2, tempStr);
+
+        char oxStr[7];
+        dtostrf(ox_, 3, 2, oxStr);
+
+        char str[100];
+        sprintf(str, "%d %5s %5s %d STOP",
+            pulse,
+            oxStr,
+            tempStr,
+            isDevRem);
+
+        if(isProblem)
+            bt_.communicate(str, problems);
+        else
+            bt_.communicate(str, "");
+        //count = 0;
     }
-    // bt_.communicate(str);
 }
 
 void DataProcessor::setPulseOx(int pulse, float ox)
@@ -113,8 +127,45 @@ float DataProcessor::calculateTemperature()
 
 int DataProcessor::isDeviceRemoved(int pulse, float temp)
 {
-    if(pulse < PULSE_MIN && temp < 33.0f)
+    static int prevPulse = 0;
+    static float prevTemp = 0.0f;
+    static int wasAlreadyRemoved = 0;
+    if(wasAlreadyRemoved == 1 ||
+        ((pulse < PULSE_MIN && temp < TEMP_THRESHOLD_2)
+            && (prevPulse >= PULSE_MIN && prevTemp >= TEMP_THRESHOLD_1)) ||
+        (pulse < 30 && temp < 30.0f))
+    {
+        prevPulse = pulse;
+        prevTemp = temp;
+        wasAlreadyRemoved = 1;
         return 1;
+    }
+    else
+    {
+        prevPulse = pulse;
+        prevTemp = temp;
+        wasAlreadyRemoved = 0;
+        return 0;
+    }
+}
 
-    return 0;
+int DataProcessor::checkForProblems(int pulse, float temp, char problems[20])
+{
+    if (((pulse >= PULSE_MAX || pulse < PULSE_MIN) && temp >= TEMP_MIN && temp < TEMP_MAX) ||
+        ((temp >= TEMP_MAX || temp < TEMP_MIN ) && pulse >= PULSE_MIN && pulse < PULSE_MAX))
+    {
+
+        char tempStr[7];
+        dtostrf(temp, 3, 2, tempStr);
+
+        char oxStr[7];
+        dtostrf(ox_, 3, 2, oxStr);
+
+        sprintf(problems, "P: %d, Ox: %5s, T: %5s",
+            pulse,
+            oxStr,
+            tempStr);
+        return true;
+    }
+    return false;
 }
