@@ -3,6 +3,7 @@ package com.example.sidsapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -33,11 +34,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends Activity
 {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_ENABLE_BT = 1;
@@ -245,30 +247,38 @@ public class MainActivity extends AppCompatActivity
 
             // Output/Input streams
             OutputStream outputStream = socket_.getOutputStream();
+            PrintStream printStream = new PrintStream(outputStream);
             InputStream inputStream = socket_.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
             // Write baby months
-            outputStream.write(3);
+            outputStream.write(2);
+            outputStream.write(2);
+
+            printStream.println("SML");
+            printStream.println("150  97.30  37.52 0");
+            printStream.println("P: 90, Ox: 80.14%, T: 32.45");
+            printStream.println("OVR");
 
             // Read garbage
-            String garbage = bufferedReader.readLine();
-
-            // Read parameters
-            String parameters = bufferedReader.readLine();
-
-            // Read problems
-            String problems = bufferedReader.readLine();
-
-            // Read over
-            String over = bufferedReader.readLine();
-
-            if (parameters == null) parameters = "x";
-            Log.d(TAG, "Received" + parameters);
-
-            String[] par = parameters.split(" ");
-
-            Toast.makeText(this, garbage + " " + parameters, Toast.LENGTH_SHORT).show();
+//            String garbage = bufferedReader.readLine();
+//
+//            // Read parameters
+//            String parameters = bufferedReader.readLine();
+//
+//            // Read problems
+//            String problem1 = bufferedReader.readLine();
+//            String problem2 = bufferedReader.readLine();
+//
+//            // Read over
+//            String over = bufferedReader.readLine();
+//
+//            if (parameters == null) parameters = "x";
+//            Log.d(TAG, "Received" + parameters);
+//
+//            String[] par = parameters.split(" ");
+//
+//            Toast.makeText(this, garbage + " " + parameters, Toast.LENGTH_SHORT).show();
 
 //            if (par.length == 8) {
 //                FirebaseEntry entry = new FirebaseEntry();

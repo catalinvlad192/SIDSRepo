@@ -2,9 +2,9 @@
 #define LEDS_H_
 
 #if defined(ARDUINO) && ARDUINO >= 100
-  #include "Arduino.h"
+    #include "Arduino.h"
 #else
-  #include "WProgram.h"
+    #include "WProgram.h"
 #endif
 
 #include <inttypes.h>
@@ -13,27 +13,25 @@
 
 class Leds {
 public:
-
     enum ELed
     {
         ELed_Pulse = 0,
         ELed_OxygenLevel,
         ELed_BodyTemperature,
-        ELed_SmokeLevel,
+        ELed_Humidity,
         ELed_AmbientTemperature
     };
 
-  Leds(int pulseLed, int oxygenLed,int bodyTemperatureLed,int smokeLevelLed,int ambientTemperatureLed);
+    Leds(int pulseLed, int oxygenLed,int bodyTemperatureLed,int humidityLed,int ambientTemperatureLed);
 
-  void setLed(ELed type);
-
-  void reset();
+    void setLed(ELed type) const;
+    void reset() const;
 
 private:
-  int pulseLed_;
-  int oxygenLed_;
-  int bodyTemperatureLed_;
-  int smokeLevelLed_;
-  int ambientTemperatureLed_;
+    const int pulseLed_;
+    const int oxygenLed_;
+    const int bodyTemperatureLed_;
+    const int humidityLed_;
+    const int ambientTemperatureLed_;
 };
 #endif

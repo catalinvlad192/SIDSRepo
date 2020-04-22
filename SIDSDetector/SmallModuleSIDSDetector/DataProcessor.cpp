@@ -9,8 +9,9 @@
 #define TEMP_THRESHOLD_1 35.0f
 #define TEMP_THRESHOLD_2 33.0f
 
-DataProcessor::DataProcessor(int thermoPin)
+DataProcessor::DataProcessor(int thermoPin, int BOARD_TX, int BOARD_RX, int BOARD_EN, int BOARD_VCC)
     : thermometer_(thermoPin)
+    , bt_(BOARD_TX, BOARD_RX, BOARD_EN, BOARD_VCC)
     , pulse_(0)
     , ox_(0.0f)
 {}
@@ -20,12 +21,9 @@ void DataProcessor::tick()
     float temperature = calculateTemperature();
     int pulse = calculatePulse();
 
-/*----------------------------------------------
     static int count = 0;
     count++;
-    if(count > 1000)
--------------------------------------------------*/
-    if (Serial.available() > 0)
+    if(count > 2000)
     {
         char problems[20];
         int isDevRem = isDeviceRemoved(pulse, temperature);
@@ -48,7 +46,7 @@ void DataProcessor::tick()
             bt_.communicate(str, problems);
         else
             bt_.communicate(str, "");
-        //count = 0;
+        count = 0;
     }
 }
 
@@ -161,7 +159,7 @@ int DataProcessor::checkForProblems(int pulse, float temp, char problems[20])
         char oxStr[7];
         dtostrf(ox_, 3, 2, oxStr);
 
-        sprintf(problems, "P: %d, Ox: %5s, T: %5s",
+        sprintf(problems, "P: %d, Ox: %5s%, T: %5s",
             pulse,
             oxStr,
             tempStr);

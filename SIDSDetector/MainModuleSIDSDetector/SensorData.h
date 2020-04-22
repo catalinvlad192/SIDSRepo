@@ -3,41 +3,48 @@
 
 class SensorData {
 public:
-  SensorData(unsigned int monthsOfAge);
+    SensorData(unsigned int monthsOfAge);
 
-  //Getters for 'consts'
-  int getPulseMin() const;
-  int getPulseMax() const;
-  float getAmbientTempMin() const;
-  float getAmbientTempMax() const;
-  float getOxygenLevelMin() const;
-  float getBodyTempMin() const;
-  float getBodyTempMax() const;
-  float getSmokeLevelMax() const;
+    void addAbnormality(char abnormalities[20]);
 
-  //Attributes
-  unsigned int monthsOfAge_;
-  int pulse_;
-  float oxygenLevel_;
-  float bodyTemperature_;
-  float smokeLevel_;
-  float humidity_;
-  float ambientTemperature_;
+    //Getters for 'consts'
+    int getPulseMin() const;
+    int getPulseMax() const;
+    float getAmbientTempMin() const;
+    float getAmbientTempMax() const;
 
-  //
-  bool isDeviceProperlyAttached;
+    void setMonths(int months);
 
-  // Vectors of recorded abmormalities
+    //Attributes
+    int pulse_;
+    float oxygenLevel_;
+    float bodyTemperature_;
+    float smokeLevel_;
+    float humidity_;
+    float ambientTemperature_;
+    int isDeviceRemoved_;
+
+    // Vectors of recorded abmormalities
+    char abnormalities_[2][50];
+
+    const float OXYGENLEVEL_MIN = 88.0f;
+    const float BODYTEMP_MIN = 36.0f;
+    const float BODYTEMP_MAX = 38.0f;
+    const float SMOKELEVEL_MIN = 5000.0f;
+    const float HUMIDITY_MIN = 28.0f;
+    const float HUMIDITY_MAX = 55.0f;
 
 private:
-  //'Consts'
-  int PULSE_MIN = 100;
-  int PULSE_MAX = 180;
-  float AMBIENTTEMP_MIN = 18.0f;
-  float AMBIENTTEMP_MAX = 25.0f;
-  float OXYGENLEVEL_MIN = 88.0f;
-  float BODYTEMP_MIN = 36.0f;
-  float BODYTEMP_MAX = 38.0f;
-  float SMOKELEVEL_MAX = 100.0f;
+    void init();
+    unsigned int monthsOfAge_;
+
+    int abnIndex_ = 0;
+
+    //'Consts'
+    int PULSE_MIN = 100;
+    int PULSE_MAX = 180;
+    float AMBIENTTEMP_MIN = 18.0f;
+    float AMBIENTTEMP_MAX = 25.0f;
+
 };
 #endif

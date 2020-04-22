@@ -8,14 +8,12 @@
 #endif
 
 #include <inttypes.h>
+#include <string.h>
 
 class Bluetooth {
 public:
     Bluetooth();
-    void communicate(char* string);
-    int getBabyAgeInMonths();
-
-private:
-    int monthsOfAge_;
+    void communicateApl(char* string, char* abnormality1, char* abnormality2) const;
+    void communicateDev(int* pulse, float* ox, float* temp, int* rem, char* prob) const;
 };
 #endif

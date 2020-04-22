@@ -18,7 +18,7 @@
 class DataProcessor
 {
 public:
-    DataProcessor(int thermoPin);
+    DataProcessor(int thermoPin, int BOARD_TX, int BOARD_RX, int BOARD_EN, int BOARD_VCC);
     void tick();
     void setPulseOx(int pulse, float ox);
 

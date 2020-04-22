@@ -4,6 +4,11 @@ const int tempPin = A0;
 const int pulsePin = A2;
 const int ledPin = 13;
 
+const int BOARD_TX = 10;
+const int BOARD_RX = 9;
+const int BOARD_EN = 8;
+const int BOARD_VCC = 7;
+
 #ifndef USE_ARDUINO_INTERRUPTS
     #define USE_ARDUINO_INTERRUPTS true
     #include "PulseSensorPlayground.h"
@@ -69,11 +74,16 @@ private:
 const int PulseOx::THRESHOLD = 600;
 //---------------------------------------------------------------------------------------------------------
 
-DataProcessor proc(tempPin);
+DataProcessor proc(tempPin ,BOARD_TX, BOARD_RX, BOARD_EN, BOARD_VCC);
 PulseOx pulse(pulsePin, ledPin);
 
 void setup()
 {
+    pinMode(BOARD_EN, OUTPUT);
+    pinMode(BOARD_VCC, OUTPUT);
+    digitalWrite(BOARD_EN, LOW);
+    digitalWrite(BOARD_VCC, HIGH);
+
     Serial.begin(9600);
     pulse.begin();
 }
