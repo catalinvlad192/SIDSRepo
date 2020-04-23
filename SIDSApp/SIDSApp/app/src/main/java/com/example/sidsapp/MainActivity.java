@@ -49,8 +49,8 @@ public class MainActivity extends Activity
     private Handler handler_;
 
     // Wrappers for Firebase and Realm
-    private RealmWrapper realmWrapper;
-    private FirebaseWrapper firebaseWrapper_;
+    public RealmWrapper realmWrapper;
+    public FirebaseWrapper firebaseWrapper_;
 
     // List adapter elements
     private HashMap<String, BluetoothDevice> foundDevices_;

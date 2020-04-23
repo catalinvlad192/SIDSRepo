@@ -8,4 +8,8 @@
     <string name="how_to_give_first_aid">First aid</string>
     <string name="first_aid_title"> How to perform baby CPR</string>
 
+    <!-- Preference Titles -->
+    <string name="preference_header">Options</string>
+    <string name="baby_name"> Your baby\'s name</string>
+    <string name="baby_months">Your baby\'s months</string>
 </resources>
