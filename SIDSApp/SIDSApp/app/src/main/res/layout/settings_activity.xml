@@ -12,7 +12,7 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:textSize="24dp"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:text="@string/title_activity_check_baby" />
 
     <LinearLayout
@@ -20,10 +20,29 @@
         android:layout_height="600dp"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/settings"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp" />
+            android:layout_height="160dp"
+            android:orientation="horizontal" >
+
+            <FrameLayout
+                android:id="@+id/settings"
+                android:layout_width="250dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/issuesButton"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="-1dp"
+                android:layout_marginTop="21dp"
+                android:layout_toEndOf="@+id/settings"
+                android:background="@drawable/button_round2_no_bg"
+                android:text="Issues" />
+
+        </RelativeLayout>
+
 
         <TextView
             android:id="@+id/titleReadings"
@@ -33,7 +52,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:background="@color/colorLightBlue"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:padding="10dp"
             android:gravity="center"
             android:text="Readings"/>
@@ -58,7 +77,7 @@
                         android:layout_width="175dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#777777"
+                        android:background="@color/grey"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -66,7 +85,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Pulse"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <TextView
@@ -78,7 +97,7 @@
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/pulseText"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -86,7 +105,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="120 bpm"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <ProgressBar
@@ -98,7 +117,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/pulseVal"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:maxHeight="10dp"
                         android:minHeight="10dp"
                         android:progress="50" />
@@ -139,7 +158,7 @@
                         android:layout_width="175dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#777777"
+                        android:background="@color/grey"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -147,7 +166,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Oxygen level"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <TextView
@@ -159,7 +178,7 @@
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/oxText"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -167,7 +186,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="100.00%"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -178,22 +197,27 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="3dp"
                         android:layout_toEndOf="@+id/oxVal"
+                        android:background="@color/white"
                         app:cpb_background_progressbar_width="7dp"
-                        app:cpb_progress="48"
+                        app:cpb_progress="100"
                         app:cpb_progress_direction="to_right"
                         app:cpb_progress_max="100"
                         app:cpb_progressbar_color="@color/colorLightBlue"
-                        app:cpb_progressbar_color_start="#0043bf"
+                        app:cpb_progressbar_color_start="@color/great_green"
+                        app:cpb_progressbar_color_end="@color/bad_red"
+                        app:cpb_progressbar_color_direction="left_to_right"
                         app:cpb_progressbar_width="7dp"
                         app:cpb_start_angle="0" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/oxProgressVal"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="23dp"
                         android:layout_marginTop="23dp"
                         android:layout_toEndOf="@+id/oxVal"
+                        android:gravity="center"
                         android:text="100.00%"
                         android:textSize="10sp" />
 
@@ -211,7 +235,7 @@
                         android:layout_width="175dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#777777"
+                        android:background="@color/grey"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -219,7 +243,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Body temperature"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <TextView
@@ -231,7 +255,7 @@
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/btempText"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -239,7 +263,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="-136.84 C"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <ProgressBar
@@ -251,7 +275,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/btempVal"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:maxHeight="10dp"
                         android:minHeight="10dp"
                         android:progress="50" />
@@ -264,7 +288,7 @@
                         android:layout_marginStart="65dp"
                         android:layout_marginTop="15dp"
                         android:layout_toEndOf="@+id/btempVal"
-                        android:text="42.0"
+                        android:text="40.0"
                         android:textSize="10sp" />
 
                     <TextView
@@ -291,7 +315,7 @@
                         android:layout_width="175dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#777777"
+                        android:background="@color/grey"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -299,7 +323,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Humidity"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <TextView
@@ -311,7 +335,7 @@
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/humidityText"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -319,7 +343,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="100.00%"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar
@@ -330,23 +354,26 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="3dp"
                         android:layout_toEndOf="@+id/humidityVal"
+                        android:background="@color/white"
                         app:cpb_background_progressbar_color_direction="left_to_right"
                         app:cpb_background_progressbar_width="7dp"
-                        app:cpb_progress="48"
+                        app:cpb_progress="100"
                         app:cpb_progress_direction="to_right"
                         app:cpb_progress_max="100"
-                        app:cpb_progressbar_color="@color/colorLightBlue"
-                        app:cpb_progressbar_color_start="#0043bf"
+                        app:cpb_progressbar_color="@color/great_green"
+                        app:cpb_progressbar_color_start="@color/bad_red"
                         app:cpb_progressbar_width="7dp"
                         app:cpb_start_angle="0" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/humidityProgressVal"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="23dp"
                         android:layout_marginTop="23dp"
                         android:layout_toEndOf="@+id/humidityVal"
+                        android:gravity="center"
                         android:text="148.23%"
                         android:textSize="10sp" />
                 </RelativeLayout>
@@ -362,7 +389,7 @@
                         android:layout_width="175dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#777777"
+                        android:background="@color/grey"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -370,7 +397,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Ambient temperature"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <TextView
@@ -382,7 +409,7 @@
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/atempText"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -390,7 +417,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="-100.00 C"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <ProgressBar
@@ -402,7 +429,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/atempVal"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:maxHeight="10dp"
                         android:minHeight="10dp"
                         android:progress="50" />
@@ -441,7 +468,7 @@
                         android:layout_width="175dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#777777"
+                        android:background="@color/grey"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -449,7 +476,7 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="IAQ level"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
                     <TextView
@@ -461,7 +488,7 @@
                         android:layout_marginTop="-1dp"
                         android:layout_toEndOf="@+id/iaqText"
                         android:layout_weight="1"
-                        android:background="#ffffff"
+                        android:background="@color/white"
                         android:gravity="center"
                         android:padding="5dp"
                         android:paddingLeft="10dp"
@@ -469,44 +496,41 @@
                         android:paddingRight="10dp"
                         android:paddingBottom="10dp"
                         android:text="Hazardous"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <ProgressBar
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
                         android:id="@+id/iaqProgress"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="135dp"
-                        android:layout_height="60dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginTop="-1dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginTop="3dp"
                         android:layout_toEndOf="@+id/iaqVal"
-                        android:background="#ffffff"
-                        android:maxHeight="10dp"
-                        android:minHeight="10dp"
-                        android:progress="50" />
+                        android:background="@color/white"
+                        app:cpb_background_progressbar_width="7dp"
+                        app:cpb_progress="100"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progress_max="100"
+                        app:cpb_progressbar_color="@color/colorLightBlue"
+                        app:cpb_progressbar_color_start="@color/great_green"
+                        app:cpb_progressbar_color_end="@color/bad_red"
+                        app:cpb_progressbar_color_direction="left_to_right"
+                        app:cpb_progressbar_width="7dp"
+                        app:cpb_start_angle="0" />
 
                     <TextView
-                        android:id="@+id/iaqMax"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/iaqProgressVal"
+                        android:layout_width="40dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-                        android:layout_marginStart="59dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginTop="26dp"
                         android:layout_toEndOf="@+id/iaqVal"
-                        android:text="Great"
-                        android:textSize="10sp" />
+                        android:gravity="center"
+                        android:text="Very unhealthy"
+                        android:textSize="6sp" />
 
-                    <TextView
-                        android:id="@+id/iaqMin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_toEndOf="@+id/iaqVal"
-                        android:text="Bad"
-                        android:textSize="10sp" />
                 </RelativeLayout>
 
             </LinearLayout>

@@ -36,7 +36,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:background="@color/colorLightBlue"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:padding="10dp"
             android:gravity="center"
             android:text="Unresponsive not breathing baby"/>
@@ -47,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:padding="10dp"
                 android:text="  If someone is with you, get them to call for emergency help.\n
  If you’re on your own, you need to give one minute’s worth of CPR before you can call for help. This involves giving chest compressions and rescue breaths to keep the baby’s circulation going." />
@@ -60,7 +61,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:background="@color/colorLightBlue"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:padding="10dp"
                 android:gravity="center"
                 android:text="How to perform CPR on a baby"/>
@@ -71,7 +72,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:padding="10dp"
                 android:text=" - Place the baby on their back on a firm surface at about waist height in front of you, or on the floor.\n
 - Give five initial rescue breaths before starting the sequence of 30 chest compressions and two rescue breaths.\n
@@ -86,7 +88,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:background="@color/colorLightBlue"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:padding="10dp"
                 android:gravity="center"
                 android:text="How to give a rescue breath"/>
@@ -97,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:padding="10dp"
                 android:text=" - If there is anything in their mouth pick it out and ensure the airway is clear and open.\n
 - Take a breath in and place your lips around the baby’s mouth and nose to form an airtight seal.\n
@@ -123,7 +126,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:background="@color/colorLightBlue"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:padding="10dp"
                 android:gravity="center"
                 android:text="How to give a chest compression"/>
@@ -134,7 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:padding="10dp"
                 android:text=" - Place two fingertips of your lower hand on the center of the baby’s chest.\n
 - Press down vertically on the breastbone, and press the chest down by at least one-third of its depth.\n
@@ -161,7 +165,7 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:background="@color/colorLightBlue"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:padding="10dp"
                 android:gravity="center"
                 android:text="Recovery position"/>
@@ -172,7 +176,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
+                android:background="@color/white"
                 android:padding="10dp"
                 android:text=" - Cradle them in your arms, with their head tilted downwards. This will keep their airway open and stop them choking on their tongue or breathing in any vomit. Continue until help arrives." />
 

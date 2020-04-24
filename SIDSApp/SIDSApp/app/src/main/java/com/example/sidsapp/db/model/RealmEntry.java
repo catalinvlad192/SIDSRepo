@@ -26,6 +26,6 @@ public class RealmEntry extends RealmObject
 
     public void addProblem(String str)
     {
-        problems_ = problems_ + " \n " + str;
+        problems_ = problems_ + "\n" + str;
     }
 }

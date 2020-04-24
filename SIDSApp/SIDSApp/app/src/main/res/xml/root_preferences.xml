@@ -3,8 +3,8 @@
     <PreferenceCategory android:title="@string/preference_header">
 
         <EditTextPreference
-            android:key="babyName"
-            android:title="@string/baby_name"/>
+            android:key="deviceId"
+            android:title="@string/device_id"/>
 
 
         <EditTextPreference

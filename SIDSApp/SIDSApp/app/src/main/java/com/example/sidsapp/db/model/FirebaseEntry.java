@@ -24,6 +24,6 @@ public class FirebaseEntry
 
     public void addProblem(String str)
     {
-        problems_ = problems_ + " \n " + str;
+        problems_ = problems_ + "\n" + str;
     }
 }

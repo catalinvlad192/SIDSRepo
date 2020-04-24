@@ -2,6 +2,7 @@ package com.example.sidsapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -11,6 +12,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,8 +51,8 @@ public class MainActivity extends Activity
     private Handler handler_;
 
     // Wrappers for Firebase and Realm
-    public RealmWrapper realmWrapper;
-    public FirebaseWrapper firebaseWrapper_;
+    public static RealmWrapper realmWrapper_;
+    public static FirebaseWrapper firebaseWrapper_;
 
     // List adapter elements
     private HashMap<String, BluetoothDevice> foundDevices_;
@@ -80,8 +82,8 @@ public class MainActivity extends Activity
         listView_ = findViewById(R.id.listView);
 
         // Create wrapper objects
-        realmWrapper = new RealmWrapper(getApplicationContext());
-        firebaseWrapper_ = new FirebaseWrapper(realmWrapper, getApplicationContext());
+        realmWrapper_ = new RealmWrapper(getApplicationContext());
+        firebaseWrapper_ = new FirebaseWrapper(realmWrapper_, getApplicationContext());
 
         // Devices found, devices addresses and handler creation
         foundDevices_ = new HashMap<String, BluetoothDevice>();
@@ -154,7 +156,7 @@ public class MainActivity extends Activity
     {
         super.onDestroy();
         firebaseWrapper_ = null;
-        realmWrapper.close();
+        realmWrapper_.close();
         unregisterReceiver(receiver);
     }
 
@@ -251,63 +253,65 @@ public class MainActivity extends Activity
             InputStream inputStream = socket_.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-            // Write baby months
-            outputStream.write(2);
-            outputStream.write(2);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String id = prefs.getString("babyMonths", "3");
+            int mths = Integer.parseInt(id);
 
-            printStream.println("SML");
-            printStream.println("150  97.30  37.52 0");
-            printStream.println("P: 90, Ox: 80.14%, T: 32.45");
-            printStream.println("OVR");
+            // Write baby months
+            outputStream.write(mths);
+            outputStream.write(mths);
+
+//            printStream.println("SML");
+//            printStream.println("150  97.30  37.52 0");
+//            printStream.println("P: 90, Ox: 80.14%, T: 32.45");
+//            printStream.println("OVR");
 
             // Read garbage
-//            String garbage = bufferedReader.readLine();
-//
-//            // Read parameters
-//            String parameters = bufferedReader.readLine();
-//
-//            // Read problems
-//            String problem1 = bufferedReader.readLine();
-//            String problem2 = bufferedReader.readLine();
-//
-//            // Read over
-//            String over = bufferedReader.readLine();
-//
-//            if (parameters == null) parameters = "x";
-//            Log.d(TAG, "Received" + parameters);
-//
-//            String[] par = parameters.split(" ");
-//
-//            Toast.makeText(this, garbage + " " + parameters, Toast.LENGTH_SHORT).show();
+            String garbage = bufferedReader.readLine();
 
-//            if (par.length == 8) {
-//                FirebaseEntry entry = new FirebaseEntry();
-//                RealmEntry realmEntry = null;
-//
-//                entry.deviceId_ = par[0];
-//                entry.pulse_ = par[1];
-//                entry.oxygenLevel_ = par[2];
-//                entry.bodyTemp_ = par[3];
-//                entry.CO2_ = par[4];
-//                entry.humidity_ = par[5];
-//                entry.temp_ = par[6];
-//
-//                if( (realmEntry = realmWrapper.fetchById(par[0])) != null)
-//                {
-//                    entry.problems_ = realmEntry.problems_;
-//                    entry.addProblem(problems);
-//                }
-//                else
-//                {
-//                    entry.problems_ = problems;
-//                }
-//
-//                firebaseWrapper_.push(entry);
-//            }
-//            else
-//            {
-//                Toast.makeText(this, "Communication failure", Toast.LENGTH_SHORT).show();
-//            }
+            // Read parameters
+            String parameters = bufferedReader.readLine();
+
+            // Read problems
+            String problem1 = bufferedReader.readLine();
+            String problem2 = bufferedReader.readLine();
+
+            // Read over
+            String over = bufferedReader.readLine();
+
+            if (parameters == null) parameters = "x";
+            Log.d(TAG, "Received" + parameters);
+
+            String[] par = parameters.split(" ");
+
+            Toast.makeText(this, garbage + " " + parameters, Toast.LENGTH_SHORT).show();
+
+            if (par.length == 8) {
+                FirebaseEntry entry = new FirebaseEntry();
+                RealmEntry realmEntry = null;
+
+                entry.deviceId_ = par[0];
+                entry.pulse_ = par[1];
+                entry.oxygenLevel_ = par[2];
+                entry.bodyTemp_ = par[3];
+                entry.CO2_ = par[4];
+                entry.humidity_ = par[5];
+                entry.temp_ = par[6];
+
+                if( (realmEntry = realmWrapper_.fetchById(par[0])) != null)
+                {
+                    entry.problems_ = realmEntry.problems_;
+                }
+
+                entry.addProblem(problem1);
+                entry.addProblem(problem2);
+
+                firebaseWrapper_.push(entry);
+            }
+            else
+            {
+                Toast.makeText(this, "Communication failure", Toast.LENGTH_SHORT).show();
+            }
         }
         catch (IOException connectException)
         {
