@@ -1,5 +1,5 @@
-#ifndef THERMOMETER_H_
-#define THERMOMETER_H_
+#ifndef SM_THERMOMETER_H_
+#define SM_THERMOMETER_H_
 
 #if defined(ARDUINO) && ARDUINO >= 100
     #include "Arduino.h"
@@ -7,8 +7,9 @@
     #include "WProgram.h"
 #endif
 
-#include <inttypes.h>
+//#include <inttypes.h>
 
+namespace sm{
 class Thermometer
 {
 public:
@@ -16,8 +17,9 @@ public:
     float getTemperature();
 
 private:
+    float getTemperatureF();
     int analogPin_;
     float bodyTemperature_;
 };
-
+} // namespace sm
 #endif  // THERMOMETER_H_

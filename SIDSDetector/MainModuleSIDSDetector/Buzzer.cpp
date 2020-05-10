@@ -1,5 +1,6 @@
 #include "Buzzer.h"
 
+namespace mm{
 Buzzer::Buzzer(int buzzerPin) : buzzerPin_(buzzerPin), duration_(500)
 {}
 
@@ -34,3 +35,4 @@ void Buzzer::clear()
         melodyVec_[i] = -1;
     }
 }
+} // namespace mm

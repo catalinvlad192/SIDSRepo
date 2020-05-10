@@ -1,5 +1,7 @@
 #include "DataProcessor.h"
 
+using namespace mm;
+
 const unsigned int TESTPIN = 13;
 const unsigned int PULSE_LED = 11;
 const unsigned int OXYGEN_LED = 10;

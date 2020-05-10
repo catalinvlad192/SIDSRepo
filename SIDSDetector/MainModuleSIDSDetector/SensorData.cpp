@@ -2,6 +2,7 @@
 
 #include <string.h>
 
+namespace mm{
 SensorData::SensorData(unsigned int monthsOfAge) :
     pulse_(140),
     oxygenLevel_(99.0f),
@@ -9,15 +10,16 @@ SensorData::SensorData(unsigned int monthsOfAge) :
     smokeLevel_(10.0f),
     humidity_(60.0f),
     ambientTemperature_(20.0f),
-    isDeviceRemoved_(false)
+    isDeviceRemoved_(0),
+	monthsOfAge_(monthsOfAge)
 {
     init();
+	strcpy(abnormalities_[0], "");
+    strcpy(abnormalities_[1], "");
 }
 
 void SensorData::init()
 {
-        strcpy(abnormalities_[0], "");
-    strcpy(abnormalities_[1], "");
     if (monthsOfAge_ <= 3)
     {
         PULSE_MIN = 110;
@@ -44,13 +46,13 @@ void SensorData::init()
         PULSE_MIN = 90;
         PULSE_MAX = 160;
         AMBIENTTEMP_MIN = 18.0f;
-        AMBIENTTEMP_MAX = 22.0f;
+        AMBIENTTEMP_MAX = 23.0f;
     }
 }
 
-void SensorData::addAbnormality(char abnormality[50])
+void SensorData::addAbnormality(const char abnormality[50])
 {
-    if (strcmp(abnormality, "-"))
+    if (strcmp(abnormality, "") == 0)
     {
         return;
     }
@@ -90,3 +92,4 @@ float SensorData::getAmbientTempMax() const
 {
     return AMBIENTTEMP_MAX;
 }
+} // namespace mm

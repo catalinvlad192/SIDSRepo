@@ -1,13 +1,13 @@
 #include "DataProcessor.h"
-
 #include "Buzzer.h"
 #include "Leds.h"
 #include "SensorData.h"
 
 #include <string.h>
 
-#define deviceId 9
+#define deviceId 24813
 
+namespace mm{
 DataProcessor::DataProcessor(int buzzerPin, int pulseLed, int oxygenLed, int bodyTemperatureLed, int humidityLed, int ambientTemperatureLed)
     : data_(SensorData(3))
     , buzzer_(Buzzer(buzzerPin))
@@ -184,6 +184,7 @@ void DataProcessor::btCommunication()
             co2,
             humidityStr,
             ambTempStr);
+
         bt_.communicateApl(str, data_.abnormalities_[0], data_.abnormalities_[1]);
         delay(50);
     }
@@ -202,6 +203,8 @@ void DataProcessor::btCommunication()
             prob);
 
         data_.addAbnormality(prob);
+
         delay(50);
     }
 }
+} // namespace mm

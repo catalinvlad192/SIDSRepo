@@ -2,6 +2,7 @@
 
 #include "SensorData.h"
 
+namespace mm{
 Leds::Leds(int pulseLed, int oxygenLed,int bodyTemperatureLed,int humidityLed,int ambientTemperatureLed)
     : pulseLed_(pulseLed)
     , oxygenLed_(oxygenLed)
@@ -31,3 +32,4 @@ void Leds::reset() const
     digitalWrite(humidityLed_, LOW);
     digitalWrite(ambientTemperatureLed_, LOW);
 }
+} // namespace mm

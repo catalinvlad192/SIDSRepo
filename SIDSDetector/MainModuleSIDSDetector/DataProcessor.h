@@ -1,5 +1,5 @@
-#ifndef DATAPROCESSOR_H_
-#define DATAPROCESSOR_H_
+#ifndef MM_DATAPROCESSOR_H_
+#define MM_DATAPROCESSOR_H_
 
 #if defined(ARDUINO) && ARDUINO >= 100
     #include "Arduino.h"
@@ -19,6 +19,7 @@
 #include "SensorData.h"
 #include "Bluetooth.h"
 
+namespace mm{
 class DataProcessor
 {
 public:
@@ -43,4 +44,5 @@ private:
     bool isBmeOk_ = true;
 
 };
+} // namespace mm
 #endif

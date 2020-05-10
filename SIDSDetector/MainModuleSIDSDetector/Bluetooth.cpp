@@ -1,9 +1,10 @@
 #include "Bluetooth.h"
 
+namespace mm{
 Bluetooth::Bluetooth()
 {}
 
-void Bluetooth::communicateApl(char* string, char* abnormality1, char* abnormality2) const
+void Bluetooth::communicateApl(const char* string, const char* abnormality1, const char* abnormality2) const
 {
         Serial2.println("GB");
         Serial2.println(string);
@@ -25,6 +26,8 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
         char t = Serial3.read();
         strncat(readData, &t, 1);
     }
+
+    Serial.println(readData);
 
     // After this we have content between SML and OVR
     const char* SML="SML\n";
@@ -48,6 +51,8 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
     // After this we have 2 strings: data and problems
     char* endlineToken;
     char splitData[2][50];
+	strcpy(splitData[0], "");
+	strcpy(splitData[1], "");
     int i=0;
 
     endlineToken = strtok(trimmedData, "\n");
@@ -99,5 +104,5 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
         }
         spaceToken = strtok(NULL, " ");
     }
-    // check boundaries
 }
+} // namespace mm

@@ -1,5 +1,5 @@
-#ifndef DATAPROCESSOR_H_
-#define DATAPROCESSOR_H_
+#ifndef SM_DATAPROCESSOR_H_
+#define SM_DATAPROCESSOR_H_
 
 #if defined(ARDUINO) && ARDUINO >= 100
     #include "Arduino.h"
@@ -13,19 +13,21 @@
 #include <stdio.h>
 
 #include "Thermometer.h"
-#include "Bluetooth.h"
+#include "SMBluetooth.h"
+#include "MAX30105Pulse.h"
+#include "MAX30105Ox.h"
 
+namespace sm{
 class DataProcessor
 {
 public:
-    DataProcessor(int thermoPin, int BOARD_TX, int BOARD_RX, int BOARD_EN, int BOARD_VCC);
+    DataProcessor(int thermoPin);
     void tick();
     void setPulseOx(int pulse, float ox);
 
 private:
-    int calculatePulse();
-    int calculatePulseWith(int instantPulse);
-    float calculateTemperature();
+    void tickPulse();
+    void tickOx();
     int isDeviceRemoved(int pulse, float temp);
     int checkForProblems(int pulse, float temp, char problems[20]);
 
@@ -35,5 +37,5 @@ private:
     int pulse_;
     float ox_;
 };
-
+} // namespace sm
 #endif  // DATAPROCESSOR_H_

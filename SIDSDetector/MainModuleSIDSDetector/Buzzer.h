@@ -1,5 +1,5 @@
-#ifndef BUZZER_H_
-#define BUZZER_H_
+#ifndef MM_BUZZER_H_
+#define MM_BUZZER_H_
 
 #define NOTE_C5 523
 #define NOTE_D5 587
@@ -15,8 +15,7 @@
 
 #include <inttypes.h>
 
-#include "SensorData.h"
-
+namespace mm{
 class Buzzer {
 public:
 
@@ -41,4 +40,5 @@ private:
     int melodyVec_[5] = {-1, -1, -1, -1, -1};
     int duration_ = 500;  // 200 miliseconds
 };
+} // namespace mm
 #endif

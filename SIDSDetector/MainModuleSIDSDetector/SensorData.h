@@ -1,11 +1,12 @@
-#ifndef SENSORDATA_H_
-#define SENSORDATA_H_
+#ifndef MM_SENSORDATA_H_
+#define MM_SENSORDATA_H_
 
+namespace mm{
 class SensorData {
 public:
     SensorData(unsigned int monthsOfAge);
 
-    void addAbnormality(char abnormalities[20]);
+    void addAbnormality(const char abnormalities[50]);
 
     //Getters for 'consts'
     int getPulseMin() const;
@@ -47,4 +48,5 @@ private:
     float AMBIENTTEMP_MAX = 25.0f;
 
 };
+} // namespace mm
 #endif

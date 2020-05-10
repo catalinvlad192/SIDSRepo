@@ -1,5 +1,5 @@
-#ifndef LEDS_H_
-#define LEDS_H_
+#ifndef MM_LEDS_H_
+#define MM_LEDS_H_
 
 #if defined(ARDUINO) && ARDUINO >= 100
     #include "Arduino.h"
@@ -11,6 +11,7 @@
 
 #include "SensorData.h"
 
+namespace mm{
 class Leds {
 public:
     enum ELed
@@ -34,4 +35,5 @@ private:
     const int humidityLed_;
     const int ambientTemperatureLed_;
 };
+} // namespace mm
 #endif
