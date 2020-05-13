@@ -1,5 +1,6 @@
 #include "MAX30105Ox.h"
 
+namespace sm{
 MAX30105Ox::MAX30105Ox()
 {}
 int MAX30105Ox::begin()
@@ -42,3 +43,4 @@ void MAX30105Ox::tick()
     //After gathering 25 new samples recalculate HR and SP02
     maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
 }
+} // namespace sm

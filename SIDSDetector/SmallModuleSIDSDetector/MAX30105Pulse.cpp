@@ -1,5 +1,6 @@
 #include "MAX30105Pulse.h"
 
+namespace sm{
 MAX30105Pulse::MAX30105Pulse()
 {}
 int MAX30105Pulse::begin()
@@ -45,3 +46,4 @@ void MAX30105Pulse::tick()
     if (irValue < 50000)
         beatAvg = 0;
 }
+} // namespace sm

@@ -1,7 +1,7 @@
 #include "SMDataProcessor.h"
 
-#define PULSE_MIN 90 // 50 for tests
-#define PULSE_MAX 200 // 90 for tests
+#define PULSE_MIN 50 // 90 for real life
+#define PULSE_MAX 90 // 200 for real life
 
 #define TEMP_MAX 38.0f
 #define TEMP_MIN 36.0f
@@ -18,14 +18,24 @@ DataProcessor::DataProcessor(int thermoPin)
 
 void DataProcessor::tick()
 {
+    static int prevPulse = 76;
     tickPulse();
     tickOx();
     float temperature = thermometer_.getTemperature();
 
-    char problems[50];
-    int isDevRem = isDeviceRemoved(pulse_, temperature);
+    if (pulse_ < PULSE_MIN && ox_ > 50.0f)
+    {
+        pulse_ = prevPulse;
+    }
+    else
+    {
+        prevPulse = pulse_;
+    }
 
-    int isProblem = checkForProblems(pulse_, temperature, problems);
+    char problems[50];
+    int isDevRem = isDeviceRemoved(pulse_, ox_, temperature);
+
+    int isProblem = checkForProblems(pulse_, ox_, temperature, isDevRem, problems);
 
     char tempStr[7];
     dtostrf(temperature, 3, 2, tempStr);
@@ -111,39 +121,14 @@ void DataProcessor::tickOx()
     }
 }
 
-int DataProcessor::isDeviceRemoved(int pulse, float temp)
+int DataProcessor::isDeviceRemoved(int pulse, float ox, float temp)
 {
-    static int prevPulse = 0;
-    static float prevTemp = 0.0f;
-    static int wasAlreadyRemoved = 0;
-
-    if(prevPulse >= PULSE_MIN && pulse >= PULSE_MIN
-        && prevTemp >= TEMP_MIN && temp >= TEMP_MIN)
-    {
-        wasAlreadyRemoved = 0;
-    }
-
-    if(wasAlreadyRemoved == 1 ||
-        ((pulse < PULSE_MIN && temp < TEMP_THRESHOLD_2)
-            && (prevPulse >= PULSE_MIN && prevTemp >= TEMP_THRESHOLD_1)) ||
-        (pulse < 30 && temp < 30.0f))
-    {
-        prevPulse = pulse;
-        prevTemp = temp;
-        wasAlreadyRemoved = 1;
-        return 1;
-    }
-    else
-    {
-        prevPulse = pulse;
-        prevTemp = temp;
-        wasAlreadyRemoved = 0;
-        return 0;
-    }
+    return (temp < TEMP_MIN) && (ox < 50.0f) && (pulse < PULSE_MIN);
 }
 
-int DataProcessor::checkForProblems(int pulse, float temp, char problems[50])
+int DataProcessor::checkForProblems(int pulse, float ox, float temp, int isRemoved, char problems[50])
 {
+    if (isRemoved) return 0;
     if (((pulse >= PULSE_MAX || pulse < PULSE_MIN) && temp >= TEMP_MIN && temp < TEMP_MAX) ||
         ((temp >= TEMP_MAX || temp < TEMP_MIN ) && pulse >= PULSE_MIN && pulse < PULSE_MAX))
     {
@@ -154,7 +139,7 @@ int DataProcessor::checkForProblems(int pulse, float temp, char problems[50])
         char oxStr[7];
         dtostrf(ox_, 3, 2, oxStr);
 
-        sprintf(problems, "P: %d, Ox: %5s%, T: %5s",
+        sprintf(problems, "P: %d Ox: %5s T: %5s",
             pulse,
             oxStr,
             tempStr);

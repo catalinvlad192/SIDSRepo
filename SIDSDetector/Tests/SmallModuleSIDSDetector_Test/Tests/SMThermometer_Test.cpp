@@ -9,7 +9,7 @@ TEST(SMThermometer_Test, SmallModuleThermometerTest)
     Thermometer t(1);
     float temp = -5.0f;
 
-    // Absolute 0
+    // Absolute 0,
     THERMOMETER_ANALOG_RETURN = 0;
     temp = t.getTemperature();
     temp = roundf(temp * 100) / 100;

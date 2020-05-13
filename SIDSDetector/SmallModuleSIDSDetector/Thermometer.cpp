@@ -14,11 +14,8 @@ float Thermometer::getTemperature()
     for (unsigned char i=0; i < 20; i++)
     {
         float t = getTemperatureF();
-        if (t > 5.0f && t <= 45.0f)
-        {
-            tempAvg+=t;
-            tempCount++;
-        }
+        tempAvg+=t;
+        tempCount++;
     }
 
     if(tempCount > 0)

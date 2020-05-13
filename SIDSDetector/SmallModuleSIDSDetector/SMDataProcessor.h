@@ -28,8 +28,8 @@ public:
 private:
     void tickPulse();
     void tickOx();
-    int isDeviceRemoved(int pulse, float temp);
-    int checkForProblems(int pulse, float temp, char problems[20]);
+    int isDeviceRemoved(int pulse, float ox, float temp);
+    int checkForProblems(int pulse, float ox, float temp, int isRemoved, char problems[20]);
 
     Thermometer thermometer_;
     Bluetooth bt_;

@@ -13,6 +13,7 @@
 
 #include <inttypes.h>
 
+namespace sm{
 class MAX30105Ox
 {
 public:
@@ -32,5 +33,6 @@ private:
     int32_t heartRate = 0; //heart rate value
     int8_t validHeartRate = 0; //indicator to show if the heart rate calculation is valid
 };
+} // namespace sm
 
 #endif  // SM_MAX30105OX_H_

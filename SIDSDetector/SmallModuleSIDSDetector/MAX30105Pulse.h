@@ -16,7 +16,7 @@
 #include <inttypes.h>
 
 #define RATE_SIZE 4 //Increase this for more averaging. 4 is good.
-
+namespace sm{
 class MAX30105Pulse
 {
 public:
@@ -34,5 +34,6 @@ private:
     float beatsPerMinute = 0.0f;
     int beatAvg = 0;
 };
+} // namespace sm
 
 #endif  // SM_MAX30105PULSE_H_

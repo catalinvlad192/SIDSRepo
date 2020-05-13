@@ -3,7 +3,7 @@
 namespace sm{
 Bluetooth::Bluetooth(){}
 
-void Bluetooth::communicate(const char* string, const char* problems)
+void Bluetooth::communicate(const char* string, const char problems[50])
 {
     Serial.println("SML");
     Serial.println(string);

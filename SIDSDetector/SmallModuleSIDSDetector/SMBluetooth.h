@@ -14,7 +14,7 @@ class Bluetooth
 {
 public:
     Bluetooth();
-    void communicate(const char* string, const char* problems);
+    void communicate(const char* string, const char problems[50]);
 };
-} // namespace mm
+} // namespace sm
 #endif  // BLUETOOTH_H_
