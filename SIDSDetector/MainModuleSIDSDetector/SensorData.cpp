@@ -7,10 +7,10 @@ SensorData::SensorData(unsigned int monthsOfAge) :
     pulse_(140),
     oxygenLevel_(99.0f),
     bodyTemperature_(37.0f),
-    smokeLevel_(10.0f),
-    humidity_(60.0f),
+    smokeLevel_(50000.0f),
+    humidity_(40.0f),
     ambientTemperature_(20.0f),
-    isDeviceRemoved_(0),
+    isDeviceRemoved_(1),
 	monthsOfAge_(monthsOfAge)
 {
     init();

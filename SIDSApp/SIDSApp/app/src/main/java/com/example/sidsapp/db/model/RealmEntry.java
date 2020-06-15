@@ -4,28 +4,31 @@ import io.realm.RealmObject;
 
 public class RealmEntry extends RealmObject
 {
-    public String deviceId_;
-    public String pulse_;
-    public String oxygenLevel_;
-    public String bodyTemp_;
-    public String CO2_;
-    public String humidity_;
-    public String temp_;
-    public String problems_;
+    public String time;
+    public String deviceId;
+    public String pulse;
+    public String oxygenLevel;
+    public String bodyTemperature;
+    public String CO2Resistance;
+    public String humidity;
+    public String ambientTemperature;
+    public String isDeviceRemoved;
+    public String problems;
 
     public String toString()
     {
-        return deviceId_
-                + " Pulse: " + pulse_
-                + " OxygenLevel: " + oxygenLevel_
-                + " BodyTemperature: " + bodyTemp_
-                + " Gas: " + CO2_
-                + " Humidity: " + humidity_
-                + " Temp: " + temp_;
+        return deviceId + " " + time
+                + " Pulse: " + pulse
+                + " OxygenLevel: " + oxygenLevel
+                + " BodyTemperature: " + bodyTemperature
+                + " Gas: " + CO2Resistance
+                + " Humidity: " + humidity
+                + " Temp: " + ambientTemperature
+                + " IsDeviceRemoved " + isDeviceRemoved;
     }
 
     public void addProblem(String str)
     {
-        problems_ = problems_ + "\n" + str;
+        problems = problems + "\n" + str;
     }
 }

@@ -13,7 +13,7 @@ float Thermometer::getTemperature()
 
     for (unsigned char i=0; i < 20; i++)
     {
-        float t = getTemperatureF();
+        float t = calculateTemperature();
         tempAvg+=t;
         tempCount++;
     }
@@ -26,7 +26,7 @@ float Thermometer::getTemperature()
         return 0.0f;
 }
 
-float Thermometer::getTemperatureF()
+float Thermometer::calculateTemperature()
 {
     int Vo;
     float R1 = 100000;

@@ -16,6 +16,5 @@ void setup()
 
 void loop()
 {
-    //proc.setPulseOx(50, 50.0f);
     proc.tick();
 }

@@ -29,7 +29,7 @@ public:
     char abnormalities_[2][50];
 
     const float OXYGENLEVEL_MIN = 88.0f;
-    const float BODYTEMP_MIN = 36.0f;
+    const float BODYTEMP_MIN = 35.5f;
     const float BODYTEMP_MAX = 38.0f;
     const float SMOKELEVEL_MIN = 5000.0f;
     const float HUMIDITY_MIN = 28.0f;

@@ -9,7 +9,7 @@
 
 namespace mm{
 DataProcessor::DataProcessor(int buzzerPin, int pulseLed, int oxygenLed, int bodyTemperatureLed, int humidityLed, int ambientTemperatureLed)
-    : data_(SensorData(3))
+    : data_(SensorData(1))
     , buzzer_(Buzzer(buzzerPin))
     , leds_(Leds(pulseLed, oxygenLed, bodyTemperatureLed, humidityLed, ambientTemperatureLed))
 {
@@ -19,22 +19,18 @@ DataProcessor::DataProcessor(int buzzerPin, int pulseLed, int oxygenLed, int bod
         isBmeOk_ = false;
         delay(50);
     }
-    //if (isBmeOk_)
-    //{
-        // Set up oversampling and filter initialization
-        bme_.setTemperatureOversampling(BME680_OS_8X);
-        bme_.setHumidityOversampling(BME680_OS_2X);
-        bme_.setPressureOversampling(BME680_OS_4X);
-        bme_.setIIRFilterSize(BME680_FILTER_SIZE_3);
-        bme_.setGasHeater(320, 150); // 320*C for 150 ms
 
-        bme_.performReading();
-    //}
+    bme_.setTemperatureOversampling(BME680_OS_8X);
+    bme_.setHumidityOversampling(BME680_OS_2X);
+    bme_.setPressureOversampling(BME680_OS_4X);
+    bme_.setIIRFilterSize(BME680_FILTER_SIZE_3);
+    bme_.setGasHeater(320, 150);
+
+    bme_.performReading();
 }
 
 void DataProcessor::tick()
 {
-      //BLE
       readAmbientParameters();
       setLedsAndBuzzer();
       btCommunication();
@@ -72,7 +68,7 @@ void DataProcessor::readAmbientParameters()
         humidity /= 3.0f;
         gas /= 3;
 
-        data_.ambientTemperature_ = temperature;
+        data_.ambientTemperature_ = temperature - 4;
         data_.humidity_ = humidity;
         data_.smokeLevel_ = gas;
 
@@ -111,8 +107,9 @@ void DataProcessor::setLedsAndBuzzer()
     }
     else
     {
+        bool buzzNeeded = isBuzzerNeeded();
         // Blue
-        if (data_.pulse_ < data_.getPulseMin() || data_.pulse_ > data_.getPulseMax() )
+        if (data_.pulse_ < data_.getPulseMin() || data_.pulse_ > data_.getPulseMax())
         {
             leds_.setLed(Leds::ELed_Pulse);
             buzzer_.addNoteFor(Buzzer::EBuzzType_Pulse);
@@ -133,16 +130,31 @@ void DataProcessor::setLedsAndBuzzer()
         if (data_.humidity_ < data_.HUMIDITY_MIN || data_.humidity_ > data_.HUMIDITY_MAX)
         {
             leds_.setLed(Leds::ELed_Humidity);
-            buzzer_.addNoteFor(Buzzer::EBuzzType_Humidity);
+            if (buzzNeeded) buzzer_.addNoteFor(Buzzer::EBuzzType_Humidity);
         }
         // White
         if (data_.ambientTemperature_ < data_.getAmbientTempMin() || data_.ambientTemperature_ > data_.getAmbientTempMax())
         {
             leds_.setLed(Leds::ELed_AmbientTemperature);
-            buzzer_.addNoteFor(Buzzer::EBuzzType_AmbientTemperature);
+            if (buzzNeeded) buzzer_.addNoteFor(Buzzer::EBuzzType_AmbientTemperature);
         }
         buzzer_.sing();
     }
+}
+
+bool DataProcessor::isBuzzerNeeded()
+{
+    bool isNeeded = false;
+    int ambCount = 0;
+
+    if (data_.humidity_ < data_.HUMIDITY_MIN || data_.humidity_ > data_.HUMIDITY_MAX)
+        ambCount++;
+    if (data_.ambientTemperature_ < data_.getAmbientTempMin() || data_.ambientTemperature_ > data_.getAmbientTempMax())
+        ambCount++;
+    if (ambCount > 2)
+        isNeeded = true;
+
+    return isNeeded;
 }
 
 void DataProcessor::btCommunication()
@@ -176,24 +188,23 @@ void DataProcessor::btCommunication()
         dtostrf(data_.ambientTemperature_, 3, 2, ambTempStr);
 
         char str[100];
-        sprintf(str, "%d %d %5s %5s %d %5s %5s STOP",
+        sprintf(str, "%d %d %5s %5s %d %5s %5s %d STOP",
             deviceId,
             data_.pulse_,
             oxygenStr,
             bodyTempStr,
             co2,
             humidityStr,
-            ambTempStr);
+            ambTempStr,
+            data_.isDeviceRemoved_);
 
         bt_.communicateApl(str, data_.abnormalities_[0], data_.abnormalities_[1]);
         delay(50);
     }
-    delay(50);
     if (Serial3.available() > 0)
     {
-        delay(10);
         char prob[50];
-        strcpy(prob, "-");
+        strcpy(prob, "");
         delay(50);
         bt_.communicateDev(
             &(data_.pulse_),

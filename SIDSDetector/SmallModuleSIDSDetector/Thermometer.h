@@ -17,7 +17,7 @@ public:
     float getTemperature();
 
 private:
-    float getTemperatureF();
+    float calculateTemperature();
     int analogPin_;
     float bodyTemperature_;
 };

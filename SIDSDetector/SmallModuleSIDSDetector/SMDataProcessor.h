@@ -23,19 +23,35 @@ class DataProcessor
 public:
     DataProcessor(int thermoPin);
     void tick();
-    void setPulseOx(int pulse, float ox);
 
 private:
     void tickPulse();
     void tickOx();
-    int isDeviceRemoved(int pulse, float ox, float temp);
-    int checkForProblems(int pulse, float ox, float temp, int isRemoved, char problems[20]);
+    int checkIfDeviceRemoved();
+    int checkForProblems(char problems[20]);
 
     Thermometer thermometer_;
     Bluetooth bt_;
 
     int pulse_;
+    int prevPulse_;
     float ox_;
+    float prevOx_;
+    float temp_;
+    float prevTemp_;
+    int isDeviceRemoved_;
+
+    const int PULSE_MIN = 50; // 90
+    const int PULSE_MAX = 90; // 200
+    const int PULSE_THRESHOLD = 40;
+
+    const float TEMP_MAX = 38.0f;
+    const float TEMP_MIN = 35.5f;
+    const float TEMP_THRESHOLD = 33.0;
+
+    const float OX_MIN = 88.0f;
+    const float OX_THRESHOLD = 70.0f;
+
 };
 } // namespace sm
 #endif  // DATAPROCESSOR_H_

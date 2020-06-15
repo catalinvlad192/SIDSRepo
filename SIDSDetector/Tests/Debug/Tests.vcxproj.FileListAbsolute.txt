@@ -1,0 +1,5 @@
+A:\Workspace\AndroidStudio\SIDSRepo\SIDSDetector\Tests\Debug\Tests.exe
+A:\Workspace\AndroidStudio\SIDSRepo\SIDSDetector\Tests\Debug\Tests.vcxproj.CopyComplete
+A:\Workspace\AndroidStudio\SIDSRepo\SIDSDetector\Tests\Debug\Tests.pdb
+A:\Workspace\AndroidStudio\SIDSRepo\SIDSDetector\Tests\Debug\gtest.pdb
+A:\Workspace\AndroidStudio\SIDSRepo\SIDSDetector\Tests\Debug\gtest_main.pdb

@@ -1,7 +1,6 @@
 package com.example.sidsapp;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
@@ -36,7 +35,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -127,7 +125,7 @@ public class MainActivity extends Activity
             }
         });
 
-        // On startScanButton_ click
+        // On searchDevice_ button click
         searchDevice_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -249,7 +247,7 @@ public class MainActivity extends Activity
 
             // Output/Input streams
             OutputStream outputStream = socket_.getOutputStream();
-            PrintStream printStream = new PrintStream(outputStream);
+            // PrintStream printStream = new PrintStream(outputStream);
             InputStream inputStream = socket_.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -260,11 +258,6 @@ public class MainActivity extends Activity
             // Write baby months
             outputStream.write(mths);
             outputStream.write(mths);
-
-//            printStream.println("SML");
-//            printStream.println("150  97.30  37.52 0");
-//            printStream.println("P: 90, Ox: 80.14%, T: 32.45");
-//            printStream.println("OVR");
 
             // Read garbage
             String garbage = bufferedReader.readLine();
@@ -282,26 +275,36 @@ public class MainActivity extends Activity
             if (parameters == null) parameters = "x";
             Log.d(TAG, "Received" + parameters);
 
-            String[] par = parameters.split(" ");
+            String[] params = parameters.split(" ");
 
             Toast.makeText(this, garbage + " " + parameters, Toast.LENGTH_SHORT).show();
 
-            if (par.length == 8) {
+            ArrayList<String> par = new ArrayList<String>();
+
+            for(String s : params)
+            {
+                if (s.compareTo("") != 0)
+                {
+                    par.add(s);
+                }
+            }
+
+            if (par.size() == 9) {
                 FirebaseEntry entry = new FirebaseEntry();
                 RealmEntry realmEntry = null;
+                Long tsLong = System.currentTimeMillis()/1000;
+                String date = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date (tsLong*1000));
+                date = date.replace('/', '_');
 
-                entry.deviceId_ = par[0];
-                entry.pulse_ = par[1];
-                entry.oxygenLevel_ = par[2];
-                entry.bodyTemp_ = par[3];
-                entry.CO2_ = par[4];
-                entry.humidity_ = par[5];
-                entry.temp_ = par[6];
-
-                if( (realmEntry = realmWrapper_.fetchById(par[0])) != null)
-                {
-                    entry.problems_ = realmEntry.problems_;
-                }
+                entry.deviceId = par.get(0);
+                entry.pulse = par.get(1);
+                entry.oxygenLevel = par.get(2);
+                entry.bodyTemperature = par.get(3);
+                entry.CO2Resistance = par.get(4);
+                entry.humidity = par.get(5);
+                entry.ambientTemperature = par.get(6);
+                entry.isDeviceRemoved = par.get(7);
+                entry.time = date;
 
                 entry.addProblem(problem1);
                 entry.addProblem(problem2);
@@ -331,9 +334,9 @@ public class MainActivity extends Activity
     // ListAdapter class
     class MyAdapter extends ArrayAdapter<String>
     {
-        Context context_;
-        ArrayList<String> devsAddress_;
-        HashMap<String, BluetoothDevice> devsHashMap_;
+        private Context context_;
+        private ArrayList<String> devsAddress_;
+        private HashMap<String, BluetoothDevice> devsHashMap_;
 
         MyAdapter(Context ctx, ArrayList<String> devs, HashMap<String,BluetoothDevice> devMap)
         {

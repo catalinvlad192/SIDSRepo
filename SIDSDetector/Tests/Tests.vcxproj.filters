@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SmallModuleSIDSDetector_Test\Tests\SMBluetooth_Test.cpp" />
+    <ClCompile Include="SmallModuleSIDSDetector_Test\Tests\SMThermometer_Test.cpp" />
+    <ClCompile Include="..\MainModuleSIDSDetector\Bluetooth.cpp" />
+    <ClCompile Include="..\MainModuleSIDSDetector\Buzzer.cpp" />
+    <ClCompile Include="..\MainModuleSIDSDetector\SensorData.cpp" />
+    <ClCompile Include="include\WProgram.cpp" />
+    <ClCompile Include="MainModuleSIDSDetector_Test\Tests\MMBluetooth_Test.cpp" />
+    <ClCompile Include="MainModuleSIDSDetector_Test\Tests\MMBuzzer_Test.cpp" />
+    <ClCompile Include="MainModuleSIDSDetector_Test\Tests\MMDataProcessor_Test.cpp" />
+    <ClCompile Include="MainModuleSIDSDetector_Test\Tests\MMLeds_Test.cpp" />
+    <ClCompile Include="MainModuleSIDSDetector_Test\Tests\MMSensorData_Test.cpp" />
+    <ClCompile Include="..\MainModuleSIDSDetector\Leds.cpp" />
+    <ClCompile Include="..\MainModuleSIDSDetector\DataProcessor.cpp" />
+    <ClCompile Include="include\Adafruit_BME680.cpp" />
+    <ClCompile Include="..\SmallModuleSIDSDetector\Thermometer.cpp" />
+    <ClCompile Include="..\SmallModuleSIDSDetector\SMBluetooth.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="..\MainModuleSIDSDetector\Bluetooth.h" />
+    <ClInclude Include="..\MainModuleSIDSDetector\Buzzer.h" />
+    <ClInclude Include="..\MainModuleSIDSDetector\SensorData.h" />
+    <ClInclude Include="include\WProgram.h" />
+    <ClInclude Include="..\MainModuleSIDSDetector\Leds.h" />
+    <ClInclude Include="..\MainModuleSIDSDetector\DataProcessor.h" />
+    <ClInclude Include="include\Adafruit_Sensor.h" />
+    <ClInclude Include="include\Adafruit_BME680.h" />
+    <ClInclude Include="..\SmallModuleSIDSDetector\Thermometer.h" />
+    <ClInclude Include="..\SmallModuleSIDSDetector\SMBluetooth.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

@@ -25,8 +25,10 @@ public class FirebaseWrapper
 
         context_ = context;
         database_ = FirebaseDatabase.getInstance();
-        myRef_ = database_.getReference();
+        myRef_ = database_.getReference("myDb");
         realmWrapper_ = realm;
+
+
 
         if (myRef_ != null)
         {
@@ -44,15 +46,18 @@ public class FirebaseWrapper
                     realmWrapper_.deleteEverything();
                     for(DataSnapshot x : dataSnapshot.getChildren())
                     {
-                        FirebaseEntry value = x.getValue(FirebaseEntry.class);
-                        if(value != null)
+                        for (DataSnapshot y : x.getChildren())
                         {
-                            realmWrapper_.createOrUpdateEntry(value);
-                            Log.d(TAG, "[onDataChange]Value is: "
-                                    + value.toString());
+                            FirebaseEntry value = y.getValue(FirebaseEntry.class);
+                            if(value != null)
+                            {
+                                realmWrapper_.createOrUpdateEntry(value);
+                                Log.d(TAG, "[onDataChange]Value is: "
+                                        + value.toString());
 
-                        }else {
-                            Log.d(TAG, "[onDataChange]Value is NULL");
+                            }else {
+                                Log.d(TAG, "[onDataChange]Value is NULL");
+                            }
                         }
                     }
                 }
@@ -69,7 +74,7 @@ public class FirebaseWrapper
     {
         if (myRef_ != null)
         {
-            myRef_.child(entry.deviceId_).setValue(entry);
+            myRef_.child(entry.deviceId).child(entry.time).setValue(entry);
         }
         else
         {

@@ -27,11 +27,12 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
         strncat(readData, &t, 1);
     }
 
-    Serial.println(readData);
+    Serial.println("Raw");
+    Serial.println(readData); // \n
 
     // After this we have content between SML and OVR
-    const char* SML="SML\n";
-    const char* OVR="\nOVR";
+    const char* SML="SML";
+    const char* OVR="OVR";
 
     char* aux = NULL;
     char* start, *end;
@@ -50,28 +51,30 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
 
     // After this we have 2 strings: data and problems
     char* endlineToken;
-    char splitData[2][50];
+    char splitData[4][50];
 	strcpy(splitData[0], "");
 	strcpy(splitData[1], "");
+    strcpy(splitData[2], "");
+    strcpy(splitData[3], "");
     int i=0;
 
     endlineToken = strtok(trimmedData, "\n");
     while (endlineToken != NULL)
     {
-        if (i<2)
+        if (i<4)
         {
             strcpy(splitData[i],endlineToken);
             i++;
         }
         endlineToken = strtok(NULL, "\n");
     }
-    strcpy(prob, splitData[1]);
+    strcpy(prob, splitData[2]);
 
     // Process data
     char* spaceToken;
     int count = 0;
 
-    spaceToken = strtok(splitData[0], " ");
+    spaceToken = strtok(splitData[1], " ");
     while (spaceToken != NULL)
     {
         if (count == 0)
@@ -84,7 +87,7 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
         else if (count == 1)
         {
             float f = atof(spaceToken);
-            if (f <= 100.0f && f >= 50)
+            if (f <= 100.0f && f >= 0)
                 *ox = f;
             count++;
         }
@@ -104,5 +107,11 @@ void Bluetooth::communicateDev(int* pulse, float* ox, float* temp, int* rem, cha
         }
         spaceToken = strtok(NULL, " ");
     }
+
+    Serial.println("Reconstructed");
+    Serial.println(*pulse);
+    Serial.println(*ox);
+    Serial.println(*temp);
+    Serial.println(*rem);
 }
 } // namespace mm

@@ -1,37 +1,29 @@
 package com.example.sidsapp;
 
 import android.app.Dialog;
-import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import com.example.sidsapp.db.model.RealmEntry;
-import com.example.sidsapp.miscellaneous.RealmWrapper;
+import com.example.sidsapp.miscellaneous.IAQProcessor;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+
+import io.realm.RealmResults;
 
 public class CheckBabyActivity extends AppCompatActivity {
 
@@ -51,6 +43,7 @@ public class CheckBabyActivity extends AppCompatActivity {
     private Dialog dialog;
 
     private RealmEntry entry;
+    private RealmResults<RealmEntry> all;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,19 +63,8 @@ public class CheckBabyActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String id = prefs.getString("deviceId", "0");
 
-        entry = MainActivity.realmWrapper_.fetchById(id);
-
-        //----------Dirty init
-//        entry = new RealmEntry();
-//        entry.problems_ = "P: 90 Ox: 85.04 T: 35.52\nP: 85 Ox: 80.04 T: 39.52\nP: 90 Ox: 85.04 T: 35.52";
-//        entry.bodyTemp_ = "36.12";
-//        entry.CO2_ = "12000";
-//        entry.deviceId_ = "120";
-//        entry.humidity_ = "45.12";
-//        entry.oxygenLevel_ = "95.62";
-//        entry.pulse_ = "140";
-//        entry.temp_ = "23.14";
-        //-----------------------------
+        entry = MainActivity.realmWrapper_.fetchMostRecent();
+        final RealmResults<RealmEntry> all = MainActivity.realmWrapper_.getEntireDatabase();
 
         findById();
 
@@ -92,10 +74,15 @@ public class CheckBabyActivity extends AppCompatActivity {
             public void onClick(View view)
             {
 
-
                 ArrayList<String> prArray = new ArrayList<String>();
                 if(entry != null)
-                    prArray = new ArrayList<String>(Arrays.asList(entry.problems_.split("\n")));
+                    prArray = new ArrayList<String>(Arrays.asList(entry.problems.split("\n")));
+
+                for (RealmEntry e : all)
+                {
+                    ArrayList<String> arr = new ArrayList<String>(Arrays.asList(e.problems.split("\n")));
+                    prArray.addAll(arr);
+                }
 
                 dialog.setContentView(R.layout.custom_popup);
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.popup_element, R.id.problem, prArray);
@@ -165,8 +152,8 @@ public class CheckBabyActivity extends AppCompatActivity {
 
     private void setPulse()
     {
-        Log.d("CheckBabyActivity", entry.pulse_);
-        int pulse = Integer.parseInt(entry.pulse_);
+        Log.d("CheckBabyActivity", entry.pulse);
+        int pulse = Integer.parseInt(entry.pulse);
 
         if(pulse < 60)
             pulseProgress.setProgress(0);
@@ -178,7 +165,7 @@ public class CheckBabyActivity extends AppCompatActivity {
             int perc = (int)Math.round(percentage*100);
             pulseProgress.setProgress(perc);
         }
-        pulseVal.setText(entry.pulse_ + " bpm");
+        pulseVal.setText(entry.pulse + " bpm");
 
         if(pulse < 100)
             pulseText.setBackgroundResource(R.color.bad_red);
@@ -197,12 +184,12 @@ public class CheckBabyActivity extends AppCompatActivity {
     }
     private void setOxygenLevel()
     {
-        Log.d("CheckBabyActivity", entry.oxygenLevel_);
-        double ox = Double.parseDouble(entry.oxygenLevel_);
+        Log.d("CheckBabyActivity", entry.oxygenLevel);
+        double ox = Double.parseDouble(entry.oxygenLevel);
         int oxint = (int)Math.round(ox);
-        oxProgressVal.setText(entry.oxygenLevel_ + "%");
+        oxProgressVal.setText(entry.oxygenLevel + "%");
         oxProgress.setProgress(oxint);
-        oxVal.setText(entry.oxygenLevel_ + "%");
+        oxVal.setText(entry.oxygenLevel + "%");
 
         if(ox >= 95.0)
             oxText.setBackgroundResource(R.color.great_green);
@@ -217,8 +204,8 @@ public class CheckBabyActivity extends AppCompatActivity {
     }
     private void setBodyTep()
     {
-        Log.d("CheckBabyActivity", entry.bodyTemp_);
-        double btemp = Double.parseDouble(entry.bodyTemp_);
+        Log.d("CheckBabyActivity", entry.bodyTemperature);
+        double btemp = Double.parseDouble(entry.bodyTemperature);
 
         if(btemp < 35.0)
             btempProgress.setProgress(0);
@@ -231,7 +218,7 @@ public class CheckBabyActivity extends AppCompatActivity {
             btempProgress.setProgress(perc);
         }
 
-        btempVal.setText(entry.bodyTemp_ + "C");
+        btempVal.setText(entry.bodyTemperature + "C");
 
         if(btemp < 35.0)
             btempText.setBackgroundResource(R.color.bad_red);
@@ -255,12 +242,12 @@ public class CheckBabyActivity extends AppCompatActivity {
     private void setHumidity()
     {
 
-        Log.d("CheckBabyActivity", entry.humidity_);
-        double hum = Double.parseDouble(entry.humidity_);
+        Log.d("CheckBabyActivity", entry.humidity);
+        double hum = Double.parseDouble(entry.humidity);
         int humint = (int)Math.round(hum);
-        humidityProgressVal.setText(entry.humidity_ + "%");
+        humidityProgressVal.setText(entry.humidity + "%");
         humidityProgress.setProgress(humint);
-        humidityVal.setText(entry.humidity_ + "%");
+        humidityVal.setText(entry.humidity + "%");
 
         if(hum < 25.0)
             humidityText.setBackgroundResource(R.color.bad_red);
@@ -283,8 +270,8 @@ public class CheckBabyActivity extends AppCompatActivity {
     }
     private void setAmbTemp()
     {
-        Log.d("CheckBabyActivity", entry.temp_);
-        double atemp = Double.parseDouble(entry.temp_);
+        Log.d("CheckBabyActivity", entry.ambientTemperature);
+        double atemp = Double.parseDouble(entry.ambientTemperature);
 
         if(atemp < 15.0)
             atempProgress.setProgress(0);
@@ -296,7 +283,7 @@ public class CheckBabyActivity extends AppCompatActivity {
             int perc = (int)Math.round(percentage*100);
             atempProgress.setProgress(perc);
         }
-        atempVal.setText(entry.temp_ + "C");
+        atempVal.setText(entry.ambientTemperature + "C");
         atempText.setBackgroundResource(R.color.colorPrimaryDark);
 
         if(atemp < 15.0)
@@ -322,8 +309,8 @@ public class CheckBabyActivity extends AppCompatActivity {
     {
         Log.d("CheckBabyActivity", "Good");
 
-        IAQProcessor.EIAQLevel iaqScore = IAQProcessor.calculateIAQ(Double.parseDouble(entry.humidity_),
-                Double.parseDouble(entry.CO2_));
+        IAQProcessor.EIAQLevel iaqScore = IAQProcessor.calculateIAQ(Double.parseDouble(entry.humidity),
+                Double.parseDouble(entry.CO2Resistance));
 
         switch(iaqScore)
         {

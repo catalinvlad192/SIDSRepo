@@ -35,6 +35,7 @@ private:
     void setLedsAndBuzzer();
     void readAmbientParameters();
     void btCommunication();
+    bool isBuzzerNeeded();
 
     SensorData data_;
     Buzzer buzzer_;

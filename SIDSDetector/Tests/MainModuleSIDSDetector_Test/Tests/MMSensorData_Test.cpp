@@ -12,7 +12,7 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(20.0f, data->getAmbientTempMin());
     EXPECT_EQ(25.0f, data->getAmbientTempMax());
     EXPECT_EQ(88.0f, data->OXYGENLEVEL_MIN);
-    EXPECT_EQ(36.0f, data->BODYTEMP_MIN);
+    EXPECT_EQ(35.5f, data->BODYTEMP_MIN);
     EXPECT_EQ(38.0f, data->BODYTEMP_MAX);
     EXPECT_EQ(5000.0f, data->SMOKELEVEL_MIN);
     EXPECT_EQ(28.0f, data->HUMIDITY_MIN);
@@ -20,8 +20,8 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(140, data->pulse_);
     EXPECT_EQ(99.0f, data->oxygenLevel_);
     EXPECT_EQ(37.0f, data->bodyTemperature_);
-    EXPECT_EQ(10.0f, data->smokeLevel_);
-    EXPECT_EQ(60.0f, data->humidity_);
+    EXPECT_EQ(50000.0f, data->smokeLevel_);
+    EXPECT_EQ(40.0f, data->humidity_);
     EXPECT_EQ(20.0f, data->ambientTemperature_);
     EXPECT_EQ(0, data->isDeviceRemoved_);
     EXPECT_EQ(0, strcmp(data->abnormalities_[0], ""));
@@ -34,7 +34,7 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(20.0f, data->getAmbientTempMin());
     EXPECT_EQ(25.0f, data->getAmbientTempMax());
     EXPECT_EQ(88.0f, data->OXYGENLEVEL_MIN);
-    EXPECT_EQ(36.0f, data->BODYTEMP_MIN);
+    EXPECT_EQ(35.5f, data->BODYTEMP_MIN);
     EXPECT_EQ(38.0f, data->BODYTEMP_MAX);
     EXPECT_EQ(5000.0f, data->SMOKELEVEL_MIN);
     EXPECT_EQ(28.0f, data->HUMIDITY_MIN);
@@ -42,8 +42,8 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(140, data->pulse_);
     EXPECT_EQ(99.0f, data->oxygenLevel_);
     EXPECT_EQ(37.0f, data->bodyTemperature_);
-    EXPECT_EQ(10.0f, data->smokeLevel_);
-    EXPECT_EQ(60.0f, data->humidity_);
+    EXPECT_EQ(50000.0f, data->smokeLevel_);
+    EXPECT_EQ(40.0f, data->humidity_);
     EXPECT_EQ(20.0f, data->ambientTemperature_);
     EXPECT_EQ(0, data->isDeviceRemoved_);
     EXPECT_EQ(0, strcmp(data->abnormalities_[0], ""));
@@ -56,7 +56,7 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(19.0f, data->getAmbientTempMin());
     EXPECT_EQ(24.0f, data->getAmbientTempMax());
     EXPECT_EQ(88.0f, data->OXYGENLEVEL_MIN);
-    EXPECT_EQ(36.0f, data->BODYTEMP_MIN);
+    EXPECT_EQ(35.5f, data->BODYTEMP_MIN);
     EXPECT_EQ(38.0f, data->BODYTEMP_MAX);
     EXPECT_EQ(5000.0f, data->SMOKELEVEL_MIN);
     EXPECT_EQ(28.0f, data->HUMIDITY_MIN);
@@ -64,8 +64,8 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(140, data->pulse_);
     EXPECT_EQ(99.0f, data->oxygenLevel_);
     EXPECT_EQ(37.0f, data->bodyTemperature_);
-    EXPECT_EQ(10.0f, data->smokeLevel_);
-    EXPECT_EQ(60.0f, data->humidity_);
+    EXPECT_EQ(50000.0f, data->smokeLevel_);
+    EXPECT_EQ(40.0f, data->humidity_);
     EXPECT_EQ(20.0f, data->ambientTemperature_);
     EXPECT_EQ(0, data->isDeviceRemoved_);
     EXPECT_EQ(0, strcmp(data->abnormalities_[0], ""));
@@ -78,7 +78,7 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(19.0f, data->getAmbientTempMin());
     EXPECT_EQ(24.0f, data->getAmbientTempMax());
     EXPECT_EQ(88.0f, data->OXYGENLEVEL_MIN);
-    EXPECT_EQ(36.0f, data->BODYTEMP_MIN);
+    EXPECT_EQ(35.5f, data->BODYTEMP_MIN);
     EXPECT_EQ(38.0f, data->BODYTEMP_MAX);
     EXPECT_EQ(5000.0f, data->SMOKELEVEL_MIN);
     EXPECT_EQ(28.0f, data->HUMIDITY_MIN);
@@ -86,8 +86,8 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(140, data->pulse_);
     EXPECT_EQ(99.0f, data->oxygenLevel_);
     EXPECT_EQ(37.0f, data->bodyTemperature_);
-    EXPECT_EQ(10.0f, data->smokeLevel_);
-    EXPECT_EQ(60.0f, data->humidity_);
+    EXPECT_EQ(50000.0f, data->smokeLevel_);
+    EXPECT_EQ(40.0f, data->humidity_);
     EXPECT_EQ(20.0f, data->ambientTemperature_);
     EXPECT_EQ(0, data->isDeviceRemoved_);
     EXPECT_EQ(0, strcmp(data->abnormalities_[0], ""));
@@ -100,7 +100,7 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(18.0f, data->getAmbientTempMin());
     EXPECT_EQ(23.0f, data->getAmbientTempMax());
     EXPECT_EQ(88.0f, data->OXYGENLEVEL_MIN);
-    EXPECT_EQ(36.0f, data->BODYTEMP_MIN);
+    EXPECT_EQ(35.5f, data->BODYTEMP_MIN);
     EXPECT_EQ(38.0f, data->BODYTEMP_MAX);
     EXPECT_EQ(5000.0f, data->SMOKELEVEL_MIN);
     EXPECT_EQ(28.0f, data->HUMIDITY_MIN);
@@ -108,8 +108,8 @@ TEST(MMSensorData_Test, AttributesShouldHaveDifferentValuesDependingOnBabysMonth
     EXPECT_EQ(140, data->pulse_);
     EXPECT_EQ(99.0f, data->oxygenLevel_);
     EXPECT_EQ(37.0f, data->bodyTemperature_);
-    EXPECT_EQ(10.0f, data->smokeLevel_);
-    EXPECT_EQ(60.0f, data->humidity_);
+    EXPECT_EQ(50000.0f, data->smokeLevel_);
+    EXPECT_EQ(40.0f, data->humidity_);
     EXPECT_EQ(20.0f, data->ambientTemperature_);
     EXPECT_EQ(0, data->isDeviceRemoved_);
     EXPECT_EQ(0, strcmp(data->abnormalities_[0], ""));
